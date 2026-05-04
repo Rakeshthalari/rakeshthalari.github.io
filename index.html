@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rakesh Thalari — IAM Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --white: #ffffff;
+    --black: #000000;
+    --gray-50: #f5f5f7;
+    --gray-100: #e8e8ed;
+    --gray-300: #b0b0b8;
+    --gray-500: #6e6e73;
+    --gray-700: #3a3a3c;
+    --gray-900: #1d1d1f;
+    --blue: #0071e3;
+    --blue-hover: #0077ed;
+    --green: #30d158;
+    --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+    --font-body: -apple-system, 'SF Pro Text', 'Inter', 'Helvetica Neue', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--white);
+    color: var(--gray-900);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    height: 48px;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 22px;
+    transition: background 0.3s;
+  }
+  .nav-logo {
+    font-size: 17px; font-weight: 600; color: var(--gray-900);
+    letter-spacing: -0.3px;
+  }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    font-size: 13px; color: var(--gray-500); text-decoration: none;
+    transition: color 0.2s; letter-spacing: -0.1px;
+  }
+  .nav-links a:hover { color: var(--gray-900); }
+  .nav-cta {
+    font-size: 13px; background: var(--blue); color: white;
+    border: none; padding: 7px 16px; border-radius: 20px; cursor: pointer;
+    font-family: var(--font-body); font-weight: 500; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--blue-hover); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--black);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-glow {
+    position: absolute; width: 800px; height: 800px;
+    background: radial-gradient(ellipse at center, rgba(0,113,227,0.15) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 13px; font-weight: 600; letter-spacing: 0.06em;
+    color: var(--blue); text-transform: uppercase; margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 700; line-height: 1.04;
+    letter-spacing: -0.035em;
+    color: var(--white);
+    margin-bottom: 24px;
+    opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
+  }
+  .hero h1 .name-accent { color: #4fc3f7; }
+  .hero-sub {
+    font-size: clamp(19px, 2.5vw, 28px); font-weight: 300;
+    color: rgba(255,255,255,0.55); letter-spacing: -0.02em;
+    max-width: 640px; line-height: 1.4;
+    opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+    margin-bottom: 48px;
+  }
+  .hero-chips {
+    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+    opacity: 0; animation: fadeUp 0.9s 0.65s forwards;
+    margin-bottom: 48px;
+  }
+  .chip {
+    font-size: 13px; font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7);
+    padding: 8px 18px; border-radius: 30px;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s;
+  }
+  .chip:hover { border-color: rgba(255,255,255,0.4); color: white; }
+  .hero-actions {
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    opacity: 0; animation: fadeUp 0.9s 0.8s forwards;
+  }
+  .btn-primary {
+    background: var(--blue); color: white; border: none;
+    padding: 14px 28px; border-radius: 30px; font-size: 17px;
+    font-weight: 500; cursor: pointer; font-family: var(--font-body);
+    transition: all 0.2s; letter-spacing: -0.2px;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--blue-hover); transform: scale(1.02); }
+  .btn-secondary {
+    background: transparent; color: var(--blue);
+    border: 1.5px solid rgba(0,113,227,0.5);
+    padding: 14px 28px; border-radius: 30px; font-size: 17px;
+    font-weight: 500; cursor: pointer; font-family: var(--font-body);
+    transition: all 0.2s; letter-spacing: -0.2px;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--blue); background: rgba(0,113,227,0.08); }
+
+  .hero-scroll {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    color: rgba(255,255,255,0.3); font-size: 11px; letter-spacing: 0.05em;
+    text-transform: uppercase; animation: bounce 2s infinite;
+    opacity: 0; animation: fadeUp 1s 1.2s forwards, bounce 2s 2s infinite;
+  }
+  .scroll-line {
+    width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { position: relative; }
+  .section-inner { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── STATS STRIP ── */
+  .stats-strip {
+    background: var(--gray-50);
+    border-top: 1px solid var(--gray-100);
+    border-bottom: 1px solid var(--gray-100);
+    padding: 56px 24px;
+  }
+  .stats-grid { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .stat-item {
+    text-align: center; padding: 0 24px;
+    border-right: 1px solid var(--gray-100);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: var(--font-display); font-size: 56px; font-weight: 700;
+    letter-spacing: -0.04em; color: var(--gray-900); line-height: 1;
+    display: block;
+  }
+  .stat-num .unit { font-size: 32px; font-weight: 600; }
+  .stat-label { font-size: 14px; color: var(--gray-500); margin-top: 8px; font-weight: 400; }
+
+  /* ── ABOUT / TAGLINE ── */
+  .tagline-section {
+    padding: 140px 24px;
+    background: var(--white); text-align: center;
+  }
+  .tagline {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4.5vw, 52px);
+    font-weight: 600; letter-spacing: -0.03em;
+    line-height: 1.12; color: var(--gray-900);
+    max-width: 820px; margin: 0 auto 28px;
+  }
+  .tagline .hl { color: var(--blue); }
+  .tagline-body {
+    font-size: 19px; color: var(--gray-500); max-width: 580px;
+    margin: 0 auto; line-height: 1.6; font-weight: 400;
+  }
+
+  /* ── EXPERTISE BENTO ── */
+  .expertise-section { padding: 0 24px 120px; background: var(--white); }
+  .section-eyebrow {
+    font-size: 13px; font-weight: 600; letter-spacing: 0.06em;
+    color: var(--blue); text-transform: uppercase;
+    margin-bottom: 12px; display: block;
+  }
+  .section-title {
+    font-family: var(--font-display); font-size: clamp(36px, 4vw, 48px);
+    font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
+    color: var(--gray-900); margin-bottom: 56px;
+  }
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto;
+    gap: 16px;
+  }
+  .bento-card {
+    background: var(--gray-50); border-radius: 20px;
+    padding: 40px 36px; overflow: hidden; position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .bento-card:hover { transform: scale(1.01); box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
+  .bento-card.span-8 { grid-column: span 8; }
+  .bento-card.span-4 { grid-column: span 4; }
+  .bento-card.span-6 { grid-column: span 6; }
+  .bento-card.span-5 { grid-column: span 5; }
+  .bento-card.span-7 { grid-column: span 7; }
+  .bento-card.dark { background: var(--gray-900); color: var(--white); }
+  .bento-card.blue { background: var(--blue); color: var(--white); }
+  .bento-card.black { background: var(--black); color: var(--white); }
+  .bento-icon {
+    font-size: 36px; margin-bottom: 20px; display: block;
+  }
+  .bento-card h3 {
+    font-family: var(--font-display); font-size: 26px; font-weight: 600;
+    letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 12px;
+  }
+  .bento-card.dark h3, .bento-card.blue h3, .bento-card.black h3 { color: var(--white); }
+  .bento-card p {
+    font-size: 15px; line-height: 1.6; color: var(--gray-500); font-weight: 400;
+  }
+  .bento-card.dark p { color: rgba(255,255,255,0.55); }
+  .bento-card.blue p { color: rgba(255,255,255,0.75); }
+  .bento-card.black p { color: rgba(255,255,255,0.5); }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .skill-pill {
+    font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 20px;
+    background: rgba(0,0,0,0.06); color: var(--gray-700);
+  }
+  .bento-card.dark .skill-pill { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+  .bento-card.blue .skill-pill { background: rgba(255,255,255,0.2); color: white; }
+  .bento-card.black .skill-pill { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+
+  .bento-big-num {
+    font-family: var(--font-display); font-size: 80px; font-weight: 700;
+    letter-spacing: -0.05em; line-height: 1; color: var(--blue);
+    margin-bottom: 8px;
+  }
+  .bento-card.dark .bento-big-num { color: #4fc3f7; }
+
+  /* ── PROJECTS ── */
+  .projects-section { padding: 120px 24px; background: var(--black); }
+  .projects-section .section-eyebrow { color: rgba(255,255,255,0.4); }
+  .projects-section .section-title { color: var(--white); }
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .project-card {
+    background: #111; border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px; padding: 44px 40px;
+    transition: all 0.3s; cursor: default; position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: ''; position: absolute; inset: 0; border-radius: 20px;
+    background: linear-gradient(135deg, rgba(0,113,227,0.06) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .project-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-4px); }
+  .project-card:hover::before { opacity: 1; }
+  .proj-domain {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.07em;
+    text-transform: uppercase; margin-bottom: 24px; padding: 5px 12px;
+    border-radius: 20px;
+  }
+  .proj-domain.sso { background: rgba(0,113,227,0.15); color: #4fc3f7; }
+  .proj-domain.mfa { background: rgba(255,159,10,0.15); color: #ff9f0a; }
+  .proj-domain.jml { background: rgba(48,209,88,0.15); color: var(--green); }
+  .proj-domain.zt { background: rgba(191,90,242,0.15); color: #bf5af2; }
+  .project-card h3 {
+    font-family: var(--font-display); font-size: 24px; font-weight: 600;
+    letter-spacing: -0.025em; color: var(--white); margin-bottom: 14px; line-height: 1.2;
+  }
+  .project-card p { font-size: 15px; color: rgba(255,255,255,0.45); line-height: 1.65; }
+  .proj-highlights {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;
+  }
+  .proj-hl {
+    font-size: 12px; color: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.05); padding: 5px 12px;
+    border-radius: 6px; border: 1px solid rgba(255,255,255,0.07);
+  }
+
+  /* ── TOOLS ── */
+  .tools-section { padding: 120px 24px; background: var(--gray-50); }
+  .tools-logos {
+    display: flex; flex-wrap: wrap; gap: 12px; margin-top: 0;
+  }
+  .tool-badge {
+    background: var(--white); border: 1px solid var(--gray-100);
+    border-radius: 12px; padding: 14px 22px;
+    font-size: 14px; font-weight: 500; color: var(--gray-700);
+    display: flex; align-items: center; gap: 10px;
+    transition: all 0.2s; cursor: default; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .tool-badge:hover { border-color: var(--gray-300); box-shadow: 0 4px 16px rgba(0,0,0,0.06); transform: translateY(-2px); }
+  .tool-icon { font-size: 18px; }
+  .tools-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .certs-list { display: flex; flex-direction: column; gap: 12px; }
+  .cert-card {
+    background: var(--white); border: 1px solid var(--gray-100);
+    border-radius: 16px; padding: 20px 24px;
+    display: flex; align-items: center; gap: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    transition: all 0.2s;
+  }
+  .cert-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
+  .cert-logo {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .cert-logo.okta { background: #00297a14; }
+  .cert-logo.google { background: #34a85314; }
+  .cert-info h4 { font-size: 15px; font-weight: 600; color: var(--gray-900); letter-spacing: -0.01em; }
+  .cert-info p { font-size: 13px; color: var(--gray-500); margin-top: 2px; }
+  .cert-check {
+    margin-left: auto; width: 22px; height: 22px; border-radius: 50%;
+    background: #30d15820; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: var(--green); flex-shrink: 0;
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    padding: 160px 24px; background: var(--white); text-align: center;
+  }
+  .contact-inner { max-width: 640px; margin: 0 auto; }
+  .contact-section .section-eyebrow { display: block; margin-bottom: 16px; }
+  .contact-title {
+    font-family: var(--font-display); font-size: clamp(36px, 4vw, 52px);
+    font-weight: 700; letter-spacing: -0.03em; color: var(--gray-900);
+    margin-bottom: 20px; line-height: 1.1;
+  }
+  .contact-sub { font-size: 19px; color: var(--gray-500); margin-bottom: 48px; line-height: 1.5; }
+  .contact-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .li-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #0a66c2; color: white; border: none;
+    padding: 14px 28px; border-radius: 30px; font-size: 16px;
+    font-weight: 500; cursor: pointer; font-family: var(--font-body);
+    transition: all 0.2s; text-decoration: none; letter-spacing: -0.15px;
+  }
+  .li-btn:hover { background: #004182; transform: scale(1.02); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--gray-50); border-top: 1px solid var(--gray-100);
+    padding: 32px 24px; text-align: center;
+  }
+  footer p { font-size: 13px; color: var(--gray-500); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── BAR ANIMATE ── */
+  .bar-wrap { margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+  .bar-row {}
+  .bar-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; }
+  .bar-label span:first-child { color: rgba(255,255,255,0.8); font-weight: 500; }
+  .bar-label span:last-child { color: rgba(255,255,255,0.4); font-size: 12px; }
+  .bar-track { background: rgba(255,255,255,0.08); border-radius: 4px; height: 4px; overflow: hidden; }
+  .bar-fill {
+    height: 100%; border-radius: 4px;
+    background: linear-gradient(90deg, #0071e3, #4fc3f7);
+    width: 0%; transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ── ACTIVE NAV LINK ── */
+  .nav-links a.active { color: var(--gray-900); }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .bento-card.span-8, .bento-card.span-4, .bento-card.span-6,
+    .bento-card.span-5, .bento-card.span-7 { grid-column: span 12; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-item:nth-child(2) { border-right: none; }
+    .tools-layout { grid-template-columns: 1fr; gap: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Rakesh Thalari</div>
+  <ul class="nav-links">
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire me</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-glow"></div>
+  <div class="hero-eyebrow">IAM Engineer · 4+ Years of Experience</div>
+  <h1>Rakesh<br><span class="name-accent">Thalari</span></h1>
+  <p class="hero-sub">Building secure, seamless identity experiences — from Zero Trust architectures to enterprise SSO at scale.</p>
+  <div class="hero-chips">
+    <span class="chip">SSO / SAML / OIDC</span>
+    <span class="chip">Multi-Factor Authentication</span>
+    <span class="chip">Zero Trust</span>
+    <span class="chip">Joiner-Mover-Leaver</span>
+    <span class="chip">Okta · GCP · Azure</span>
+  </div>
+  <div class="hero-actions">
+    <a href="#projects" class="btn-primary">View my work</a>
+    <a href="https://linkedin.com/in/rakeshthalari" target="_blank" class="btn-secondary">LinkedIn ↗</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip reveal">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <span class="stat-num"><span class="unit">4</span>+</span>
+      <div class="stat-label">Years in IAM</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">3</span>
+      <div class="stat-label">Certifications</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">4</span>
+      <div class="stat-label">Key Projects</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">∞</span>
+      <div class="stat-label">Access secured</div>
+    </div>
+  </div>
+</div>
+
+<!-- TAGLINE -->
+<section class="tagline-section reveal">
+  <h2 class="tagline">Identity is the new perimeter.<br><span class="hl">I secure it end-to-end.</span></h2>
+  <p class="tagline-body">Specialising in enterprise-grade IAM solutions — designing protocols that protect access while keeping users productive and IT teams sane.</p>
+</section>
+
+<!-- EXPERTISE BENTO -->
+<section id="expertise" class="expertise-section">
+  <div class="section-inner">
+    <span class="section-eyebrow reveal">Core expertise</span>
+    <h2 class="section-title reveal">Built on deep IAM foundations.</h2>
+    <div class="bento-grid">
+
+      <div class="bento-card dark span-8 reveal">
+        <span class="bento-icon">🔐</span>
+        <h3>SSO & Federation</h3>
+        <p>Designing enterprise Single Sign-On using SAML 2.0, OIDC, and OAuth 2.0 via Okta and Azure AD — integrating dozens of apps into one seamless authentication experience.</p>
+        <div class="skill-pills">
+          <span class="skill-pill">SAML 2.0</span>
+          <span class="skill-pill">OpenID Connect</span>
+          <span class="skill-pill">OAuth 2.0</span>
+          <span class="skill-pill">Okta</span>
+          <span class="skill-pill">Azure AD</span>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar-row">
+            <div class="bar-label"><span>Proficiency</span><span>95%</span></div>
+            <div class="bar-track"><div class="bar-fill" data-width="95"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento-card blue span-4 reveal">
+        <div class="bento-big-num">MFA</div>
+        <h3>Adaptive Authentication</h3>
+        <p>Risk-based MFA with phishing-resistant factors. Right access, right friction, every time.</p>
+        <div class="skill-pills">
+          <span class="skill-pill">FIDO2</span>
+          <span class="skill-pill">Okta Verify</span>
+          <span class="skill-pill">Push</span>
+        </div>
+      </div>
+
+      <div class="bento-card span-4 reveal">
+        <span class="bento-icon">🔄</span>
+        <h3>JML Lifecycle</h3>
+        <p>Automated Joiner, Mover, and Leaver workflows tied to HR events — same-day provisioning and instant revocation.</p>
+        <div class="skill-pills">
+          <span class="skill-pill">SCIM</span>
+          <span class="skill-pill">HR sync</span>
+          <span class="skill-pill">Okta Workflows</span>
+        </div>
+      </div>
+
+      <div class="bento-card black span-8 reveal">
+        <span class="bento-icon">🛡️</span>
+        <h3>Zero Trust Architecture</h3>
+        <p>Never trust, always verify. Designing continuous-verification access models with device posture checks, least-privilege policies, and micro-segmented network access — eliminating implicit trust from the ground up.</p>
+        <div class="skill-pills">
+          <span class="skill-pill">ZTNA</span>
+          <span class="skill-pill">BeyondCorp</span>
+          <span class="skill-pill">Zscaler</span>
+          <span class="skill-pill">Micro-segmentation</span>
+          <span class="skill-pill">Device posture</span>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar-row">
+            <div class="bar-label"><span>Proficiency</span><span>87%</span></div>
+            <div class="bar-track"><div class="bar-fill" data-width="87"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section">
+  <div class="section-inner">
+    <span class="section-eyebrow reveal">Featured projects</span>
+    <h2 class="section-title reveal">Where identity meets impact.</h2>
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="proj-domain sso">● SSO</div>
+        <h3>Enterprise Single Sign-On Implementation</h3>
+        <p>Designed and deployed SAML 2.0 and OIDC-based SSO across enterprise applications using Okta — centralising authentication and eliminating password sprawl for end users and IT teams.</p>
+        <div class="proj-highlights">
+          <span class="proj-hl">Okta · SAML · OIDC</span>
+          <span class="proj-hl">Multi-app integration</span>
+          <span class="proj-hl">Reduced login friction</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="proj-domain mfa">● MFA</div>
+        <h3>MFA Rollout & Adaptive Authentication</h3>
+        <p>Led organisation-wide MFA adoption with risk-based adaptive authentication — enforcing stronger factors for high-risk sign-ins while reducing friction for trusted devices and known locations.</p>
+        <div class="proj-highlights">
+          <span class="proj-hl">FIDO2 · Okta Verify</span>
+          <span class="proj-hl">Risk-based policies</span>
+          <span class="proj-hl">Reduced ATO risk</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="proj-domain jml">● JML</div>
+        <h3>Joiner-Mover-Leaver Automation</h3>
+        <p>Built automated JML workflows integrated with HR systems — enabling same-day provisioning for new hires, real-time role updates on transfers, and immediate access revocation on offboarding.</p>
+        <div class="proj-highlights">
+          <span class="proj-hl">SCIM provisioning</span>
+          <span class="proj-hl">HR system integration</span>
+          <span class="proj-hl">Same-day onboarding</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="proj-domain zt">● Zero Trust</div>
+        <h3>Zero Trust Network Architecture</h3>
+        <p>Architected and deployed a Zero Trust security model replacing legacy implicit network trust — enforcing continuous verification, device health checks, and least-privilege access across all users and workloads.</p>
+        <div class="proj-highlights">
+          <span class="proj-hl">Continuous verification</span>
+          <span class="proj-hl">Device posture checks</span>
+          <span class="proj-hl">Least-privilege access</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS & CERTS -->
+<section id="tools" class="tools-section">
+  <div class="section-inner">
+    <span class="section-eyebrow reveal">Tools & certifications</span>
+    <h2 class="section-title reveal">The toolkit behind the work.</h2>
+    <div class="tools-layout">
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--gray-500);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:20px;">Platforms & protocols</div>
+        <div class="tools-logos">
+          <div class="tool-badge"><span class="tool-icon">🔐</span>Okta</div>
+          <div class="tool-badge"><span class="tool-icon">☁️</span>Azure AD / Entra</div>
+          <div class="tool-badge"><span class="tool-icon">🌐</span>Google Cloud IAM</div>
+          <div class="tool-badge"><span class="tool-icon">🔑</span>SAML 2.0</div>
+          <div class="tool-badge"><span class="tool-icon">🔗</span>OIDC / OAuth 2.0</div>
+          <div class="tool-badge"><span class="tool-icon">🔄</span>SCIM</div>
+          <div class="tool-badge"><span class="tool-icon">🗂️</span>LDAP / Active Directory</div>
+          <div class="tool-badge"><span class="tool-icon">🛡️</span>Zscaler</div>
+          <div class="tool-badge"><span class="tool-icon">⚡</span>Okta Workflows</div>
+          <div class="tool-badge"><span class="tool-icon">🏗️</span>Terraform</div>
+          <div class="tool-badge"><span class="tool-icon">🌐</span>BeyondCorp</div>
+          <div class="tool-badge"><span class="tool-icon">☁️</span>AWS IAM</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--gray-500);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:20px;">Certifications</div>
+        <div class="certs-list">
+          <div class="cert-card reveal">
+            <div class="cert-logo okta">🔐</div>
+            <div class="cert-info">
+              <h4>Okta Certified Administrator</h4>
+              <p>Okta Identity Cloud</p>
+            </div>
+            <div class="cert-check">✓</div>
+          </div>
+          <div class="cert-card reveal">
+            <div class="cert-logo okta">🏅</div>
+            <div class="cert-info">
+              <h4>Okta Certified Professional</h4>
+              <p>Okta Identity Cloud</p>
+            </div>
+            <div class="cert-check">✓</div>
+          </div>
+          <div class="cert-card reveal">
+            <div class="cert-logo google">🔒</div>
+            <div class="cert-info">
+              <h4>Google Cybersecurity Analyst</h4>
+              <p>Google / Coursera</p>
+            </div>
+            <div class="cert-check">✓</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <span class="section-eyebrow reveal">Get in touch</span>
+    <h2 class="contact-title reveal">Let's build secure identity together.</h2>
+    <p class="contact-sub reveal">Open to IAM engineering roles, consulting engagements, and architecture projects. Let's talk.</p>
+    <div class="contact-actions reveal">
+      <a href="https://linkedin.com/in/rakeshthalari" target="_blank" class="li-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        Connect on LinkedIn
+      </a>
+      <a href="mailto:rakesh@email.com" class="btn-primary" style="text-decoration:none;">Send an email</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Rakesh Thalari · IAM Engineer · Built with precision</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // animate bars
+        entry.target.querySelectorAll('.bar-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width + '%';
+        });
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Also observe all bar fills regardless of parent
+  const allBars = document.querySelectorAll('.bar-fill');
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.width = entry.target.dataset.width + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  allBars.forEach(b => barObserver.observe(b));
+
+  // Nav scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      navbar.style.background = 'rgba(255,255,255,0.92)';
+    } else {
+      navbar.style.background = 'rgba(255,255,255,0.8)';
+    }
+    // Active nav link
+    const sections = ['home','expertise','projects','tools','contact'];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+      if (link) link.classList.toggle('active', rect.top <= 80 && rect.bottom > 80);
+    });
+  });
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
